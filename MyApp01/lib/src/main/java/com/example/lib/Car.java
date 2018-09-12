@@ -18,4 +18,9 @@ public class Car {
         this.paintColor = paint ;
         this.areTailLightsWorking = Taillights;
     }
+
+    public void changePaintColor(Color newPaintColor) // signature of the method
+    {
+        this.paintColor = newPaintColor;
+    }
 }
