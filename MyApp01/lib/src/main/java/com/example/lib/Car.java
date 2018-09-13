@@ -2,7 +2,7 @@ package com.example.lib;
 
 import java.awt.*;
 
-public class Car {
+public class    Car {
 
     double averageMilesPerGallon;
     String licensePlate;
