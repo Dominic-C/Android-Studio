@@ -1,4 +1,4 @@
-package com.example.week1;
+package com.example.week1.PrimeNumberChecker;
 
 public class PrimeNumberChecker {
 
@@ -11,14 +11,14 @@ public class PrimeNumberChecker {
             // if prime divisible, not a prime, return or break
             if (n % nums == 0)
             {
-                System.out.println(n + " is divisible by "  + nums + ", not a prime number");
+//                System.out.println(n + " is divisible by "  + nums + ", not a prime number");
                 return 0;
             }
 
             // if prime is not divisible, add and check again
         }
 
-        System.out.println(n + " is a prime number!");
+//        System.out.println(n + " is a prime number!");
         return 1;
     }
 

@@ -1,14 +1,19 @@
-package com.example.week1;
+package com.example.week1.Accounts;
 
 import java.util.Date;
 
 public class Account {
     private int id;
     private double balance;
-    private static double annualInterestRate = 0; // in percentage
+    private static double annualInterestRate; // in percentage
     private Date dateCreated;
 
-    Account(){} // no arg constructor
+    Account()
+    {
+        this.id = 0;
+        this.balance = 0;
+        this.setAnnualInterestRate(0);
+    } // no arg constructor
 
     Account(int inputId, double inputBalance)
     {

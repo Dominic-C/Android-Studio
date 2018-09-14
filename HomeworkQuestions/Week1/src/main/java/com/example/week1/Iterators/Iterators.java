@@ -1,4 +1,4 @@
-package com.example.week1;
+package com.example.week1.Iterators;
 
 import java.util.*;
 
@@ -27,14 +27,5 @@ public class Iterators {
         return sum2;
     }
 
-    public static void main(String [] args)
-    {
-        List<Integer> ls = new ArrayList<Integer>();
-        ls.add(1);
-        ls.add(2);
-        ls.add(3);
 
-        int total = collectionsIterator(ls); // sum by iterator
-        int total2 = forEachIterator(ls); // sum by for each loop
-    }
 }

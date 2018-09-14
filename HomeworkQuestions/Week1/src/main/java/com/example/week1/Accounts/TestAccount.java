@@ -1,4 +1,6 @@
-package com.example.week1;
+package com.example.week1.Accounts;
+
+import com.example.week1.Accounts.Account;
 
 public class TestAccount {
     public static void main(String [] args)

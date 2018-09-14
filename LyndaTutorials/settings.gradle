@@ -1,1 +1,1 @@
-include ':app', ':GettingStarted'
+include ':app', ':GettingStarted', ':OutcomeBasedOnConditions'
