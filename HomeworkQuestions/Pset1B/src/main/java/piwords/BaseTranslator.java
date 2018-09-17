@@ -34,42 +34,39 @@ public class BaseTranslator {
     public static int[] convertBase(int[] digits, int baseA,
                                     int baseB, int precisionB) {
         // TODO: Implement (Problem c)
+        // check for error
         if (baseA < 2 || baseB < 2 || precisionB < 1)
             return null;
 
+//         clone digits to aviod mutating digits array
+        int[] clonedDigits = digits.clone();
 
-        int length = digits.length;
-        int [] output = new int[length];
+        // initialize output array
+        int[] output = new int[precisionB];
 
         for (int i = 0; i < precisionB; i++)
         {
+//            1. Keep a carry, initialize to 0.
             int carry = 0;
-            int x = digits[length-1-i] * baseB + carry;
-            // new jth digit
-            carry = x/baseA;
+
+            /*2. From RIGHT to LEFT
+             *   	    a. x = multiply the jth digit by baseB and add the carry
+             *          b. the new jth digit is x % baseA
+             *          c. carry = x / baseA
+             *          */
+            for (int j = digits.length-1; j >= 0; j--) // previously did not put >= and got wrong result. This is because we must remember to iterate for the 0th element in the list44
+            {
+                int x = clonedDigits[j] * baseB + carry;
+                clonedDigits[j] = x % baseA;
+                carry = x / baseA;
+
+
+                if (clonedDigits[j] < 0 || clonedDigits[j] >= baseA)
+                    return null;
+            }
+//            3. output[i] = carry
             output[i] = carry;
-
         }
-
-//        int length = digits.length; // get length of array
-//        int result [] = new int[length]; // to store answer
-//
-//        int carry = 0; // initialize carry
-//        for(int i = length; i > 0; i--) // iterate from the end of the array
-//        {
-//
-//            int x = digits[i-1] * baseB + carry; // not digits[i] because digits[100] does not exist
-//
-//            int jthDigit = x % baseA;
-//            if(digits[jthDigit] < 0 || digits[jthDigit] >= baseA)
-//            {
-//                return null;
-//            }
-//            carry = x/baseA;
-//            result[i-1] = carry;
-//        }
-
-
         return output;
     }
 }
