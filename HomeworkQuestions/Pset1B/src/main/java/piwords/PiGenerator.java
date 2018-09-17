@@ -51,7 +51,12 @@ public class PiGenerator {
             return -1;
         else
         {
-            int result = (int)Math.round(Math.pow(a,b) % m);
+            //int result = (int)Math.round(Math.pow(a,b) % m);
+            System.out.println("a,b,m "+a+","+b+","+m);
+            int result = (int)Math.pow(a,b) % m;
+            int result2 = (int)(Math.pow(a,b) % m);
+            System.out.println( (int)Math.pow(a,b)+","+ Math.pow(a,b));
+            System.out.println("results: "+result+","+result2+","+(result==result2));
             return result;
         }
     }
