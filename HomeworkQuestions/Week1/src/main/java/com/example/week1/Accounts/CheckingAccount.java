@@ -2,26 +2,23 @@ package com.example.week1.Accounts;
 
 public class CheckingAccount extends Account {
 
-    // do i need to do so if it will use super?
+    int overdraftLimit = 5000;
 
-    CheckingAccount()
+    CheckingAccount(int inputID, double inputBalance) // not public, only visible to Accounts package
     {
-        this.id = 0;
-        this.balance = 0;
-        this.setAnnualInterestRate(0);
-    } // no arg constructor
-
-    CheckingAccount(int inputId, double inputBalance)
-    {
-        this.id = inputId;
-        this.balance = inputBalance;
+        super(inputID, inputBalance);
     }
+
 
     @Override
     public void withdraw(double amtToWithdraw)
     {
-
-        if(amtToWithdraw > overdraftLimit)
+        // to understand this question better, google the term overdraft limit in banking
+        if(this.getBalance() <= -5000) // if i hit overdraft limit, i cannot withdraw anymore
             System.out.println("over limit");
+        else
+        {
+            super.withdraw(amtToWithdraw);
+        }
     }
 }

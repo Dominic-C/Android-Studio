@@ -10,15 +10,21 @@ public class Account {
 
     Account()
     {
-        this.id = 0;
-        this.balance = 0;
-        this.setAnnualInterestRate(0);
+//        this.id = 0;
+//        this.balance = 0;
+//        this.setAnnualInterestRate(0);
+
+        // Used setters so that subclasses can use private attributes with super
+        setId(0);
+        setBalance(0);
+        setAnnualInterestRate(0);
     } // no arg constructor
 
     Account(int inputId, double inputBalance)
     {
-        this.id = inputId;
-        this.balance = inputBalance;
+        // Used setters so that subclasses can use private attributes with super
+        setId(inputId);
+        setBalance(inputBalance);
     }
 
     public int getId()
