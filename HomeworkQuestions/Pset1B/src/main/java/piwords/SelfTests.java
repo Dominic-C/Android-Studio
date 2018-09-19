@@ -39,5 +39,25 @@ public class SelfTests {
         int [] input6 = {2, 4, 3, 15, 6};
         int [] result6 = bt.convertBase(input6, 16, 26, 5);
         System.out.println("convertBase test case 1: " + Arrays.toString(result6));
+
+        int [] input7 = {2, 4, 3, 15, 6, 10, 8, 8};
+        int [] result7 = bt.convertBase(input7, 16,26, 8);
+        System.out.println("convertBase test case 2: " + Arrays.toString(result7));
+
+
+        System.out.println("========== convertDigitsToString Test cases ==========");
+
+        DigitsToStringConverter dc = new DigitsToStringConverter();
+
+        int [] digits1 = {3, 17, 18, 16, 11};
+        char [] alphabets1 = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        String result8 = dc.convertDigitsToString(digits1, 26, alphabets1);
+        System.out.println("convertDigitsToString test case 1: " + result8);
+
+        int [] digits2 = {3, 17, 18, 16, 11, 14, 10, 25};
+        char [] alphabets2 = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        String result9 = dc.convertDigitsToString(digits2, 26, alphabets2);
+        System.out.println("convertDigitsToString test case 2: " + result9);
+
     }
 }

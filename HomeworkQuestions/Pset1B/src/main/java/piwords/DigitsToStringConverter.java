@@ -19,24 +19,25 @@ public class DigitsToStringConverter {
     public static String convertDigitsToString(int[] digits, int base,
                                                char[] alphabet) {
         // TODO: Implement (Problem d)
-        String result = ""; // initialize empty string
-        for(int x : digits)
-        {
-            if(x >= base || x < 0)
-                return null;
-        }
-        if ((alphabet.length) != base)
+
+//      If alphabet.length != base, consider the input invalid, and return null.
+        if(alphabet.length != base)
             return null;
 
-        else
+//        If digits[i] >= base or digits[i] < 0 for any i, consider the input
+//     * invalid, and return null.
+
+        String output = "";
+
+        for(int i = 0; i < digits.length; i++)
         {
-            for(int i = 0; i < digits.length; i++)
+            if(digits[i] >= base || digits[i] < 0)
             {
-                result = result + alphabet[digits[i]]; // concatenating mapped alphabets
+                return null;
             }
 
-            return result;
+            output += alphabet[digits[i]]; // replacing output array's elements with the converted units
         }
-
+        return output;
     }
 }
