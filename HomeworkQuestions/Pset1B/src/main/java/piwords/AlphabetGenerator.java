@@ -59,10 +59,9 @@ public class AlphabetGenerator {
     public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
         // TODO: Implement (Problem f)
-        // check the length of each string in the array
-        System.out.println(Arrays.toString(trainingData));
 
-        // concatenate array into one large array, check if all in ASCII range (a-z and A-Z), then make all lower case, and sort
+        if(base<0)
+            return null;
 
         String combinedString = "";
         for(String x : trainingData)
@@ -76,7 +75,7 @@ public class AlphabetGenerator {
         char[] chararray = combinedString.toCharArray();
         Arrays.sort(chararray);
 
-        // generate alphabets
+        // generate alphabets in a list
         ArrayList<Character> checklist = new ArrayList<>();
         for(int i = 97; i <= 122; i++)
         {
@@ -90,17 +89,15 @@ public class AlphabetGenerator {
             hmap.put(x, 0);
         }
 
-        // for loop to increase
+        // filling up hashmap with keys and values
         for(Character y: chararray)
         {
             int value = hmap.get(y);
             hmap.put(y,value+1);
         }
 
-        // get length of array
+        // PDF
         double arrayLength = chararray.length;
-        // get probability by dividing by length
-
         double [] PDFarray = new double[26];
 
         Map<Character, Double> newHmap = new HashMap<>();
@@ -114,8 +111,26 @@ public class AlphabetGenerator {
             PDFarray[k] = newHmap.get((char)(k + 97));
         }
 
-        System.out.println(Arrays.toString(PDFarray));
+        // CDF
+        int [] CDFarray = new int[26];
+        double sum = 0;
 
-        return null;
+        for(int i = 0; i < PDFarray.length; i++)
+        {
+            sum += PDFarray[i];
+            CDFarray[i] = (int)(sum * base); // CDF array is multiplied by base in the same step
+        }
+
+        char [] ans = new char[base];
+        int indexCount = 0; // keeping track of the index.
+        for(int i = 0; i < 26; i++)
+        {
+            for(int j = 0; indexCount < CDFarray[i]; j++)
+            {
+                ans[indexCount] = (char)(i + 97);
+                indexCount++;
+            }
+        }
+        return ans;
     }
 }
