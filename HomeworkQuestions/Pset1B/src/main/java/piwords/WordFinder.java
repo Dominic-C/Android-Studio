@@ -20,13 +20,16 @@ public class WordFinder {
     public static Map<String, Integer> getSubstrings(String haystack,
                                                      String[] needles) {
         // TODO: Implement (Problem e)
-        HashMap<String, Integer> hmap = new HashMap<>();
 
-        for (String x : needles) {
-            if (haystack.contains(x))
-                hmap.put(x, haystack.indexOf(x));
+        HashMap<String, Integer> findSubstrings = new HashMap<>();
+        for(String x: needles)
+        {
+            if(haystack.contains(x))
+            {
+                findSubstrings.put(x, haystack.indexOf(x));
+            }
         }
 
-        return hmap;
+        return findSubstrings;
     }
 }

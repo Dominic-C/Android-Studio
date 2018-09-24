@@ -1,10 +1,14 @@
 package piwords;
 
+<<<<<<< HEAD
+import java.util.HashMap;
+=======
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+>>>>>>> 29c9d8e99afb201b8873b7d4897e3e5d025d81e7
 
 public class AlphabetGenerator {
     /**
@@ -59,6 +63,13 @@ public class AlphabetGenerator {
     public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
         // TODO: Implement (Problem f)
+<<<<<<< HEAD
+        if(base < 0)
+            return null;
+
+        // doing this the inefficient way..
+        for
+=======
         // check the length of each string in the array
         System.out.println(Arrays.toString(trainingData));
 
@@ -115,6 +126,7 @@ public class AlphabetGenerator {
         }
 
         System.out.println(Arrays.toString(PDFarray));
+>>>>>>> 29c9d8e99afb201b8873b7d4897e3e5d025d81e7
 
         return null;
     }

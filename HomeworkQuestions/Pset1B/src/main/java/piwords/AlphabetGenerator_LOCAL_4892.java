@@ -1,10 +1,6 @@
 package piwords;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class AlphabetGenerator {
     /**
@@ -59,62 +55,11 @@ public class AlphabetGenerator {
     public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
         // TODO: Implement (Problem f)
-        // check the length of each string in the array
-        System.out.println(Arrays.toString(trainingData));
+        if(base < 0)
+            return null;
 
-        // concatenate array into one large array, check if all in ASCII range (a-z and A-Z), then make all lower case, and sort
-
-        String combinedString = "";
-        for(String x : trainingData)
-        {
-            // might need to do a character check here.
-            x.toLowerCase();
-            combinedString = combinedString + x;
-        }
-
-        // sorting the array
-        char[] chararray = combinedString.toCharArray();
-        Arrays.sort(chararray);
-
-        // generate alphabets
-        ArrayList<Character> checklist = new ArrayList<>();
-        for(int i = 97; i <= 122; i++)
-        {
-            checklist.add((char)(i));
-        }
-
-        // create a hashmap and initialize to all 0;
-        Map<Character, Integer> hmap = new HashMap<>();
-        for(Character x: checklist)
-        {
-            hmap.put(x, 0);
-        }
-
-        // for loop to increase
-        for(Character y: chararray)
-        {
-            int value = hmap.get(y);
-            hmap.put(y,value+1);
-        }
-
-        // get length of array
-        double arrayLength = chararray.length;
-        // get probability by dividing by length
-
-        double [] PDFarray = new double[26];
-
-        Map<Character, Double> newHmap = new HashMap<>();
-        for(Character z: chararray)
-        {
-            newHmap.put(z, (double)(hmap.get(z))/arrayLength);
-        }
-
-        for(int k = 0; k < 26; k++)
-        {
-            PDFarray[k] = newHmap.get((char)(k + 97));
-        }
-
-        System.out.println(Arrays.toString(PDFarray));
+        // doing this the inefficient way..
+        for
 
         return null;
     }
