@@ -3,6 +3,7 @@ package piwords;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class AlphabetGenerator {
@@ -75,17 +76,6 @@ public class AlphabetGenerator {
         char[] chararray = combinedString.toCharArray();
         Arrays.sort(chararray);
 
-        // create a string from sorted array: {'a', 'b'} to ab
-//        String b = new String(chararray);
-//        System.out.println(b);
-
-        // 97 to 122
-//        Map<String, Integer> hmap = new HashMap<>();
-//        for(int i = 97; i < 122; i++)
-//        {
-//            System.out.println(b.indexOf((char)i));
-//        }
-
         // generate alphabets
         ArrayList<Character> checklist = new ArrayList<>();
         for(int i = 97; i <= 122; i++)
@@ -100,16 +90,32 @@ public class AlphabetGenerator {
             hmap.put(x, 0);
         }
 
-
         // for loop to increase
-
         for(Character y: chararray)
         {
             int value = hmap.get(y);
             hmap.put(y,value+1);
         }
 
-        System.out.println(hmap);
+        // get length of array
+        double arrayLength = chararray.length;
+        // get probability by dividing by length
+
+        double [] PDFarray = new double[26];
+
+        Map<Character, Double> newHmap = new HashMap<>();
+        for(Character z: chararray)
+        {
+            newHmap.put(z, (double)(hmap.get(z))/arrayLength);
+        }
+
+        for(int k = 0; k < 26; k++)
+        {
+            PDFarray[k] = newHmap.get((char)(k + 97));
+        }
+
+        System.out.println(Arrays.toString(PDFarray));
+
         return null;
     }
 }
