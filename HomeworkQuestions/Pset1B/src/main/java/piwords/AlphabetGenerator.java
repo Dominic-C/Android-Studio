@@ -1,5 +1,7 @@
 package piwords;
 
+import java.util.HashMap;
+
 public class AlphabetGenerator {
     /**
      * Given a numeric base, return a char[] that maps every digit that is
@@ -53,6 +55,12 @@ public class AlphabetGenerator {
     public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
         // TODO: Implement (Problem f)
+        if(base < 0)
+            return null;
+
+        // doing this the inefficient way..
+        for
+
         return null;
     }
 }

@@ -18,8 +18,15 @@ public class WordFinder {
      * @return The list of needles that were found in the haystack.
      */
     public static Map<String, Integer> getSubstrings(String haystack,
-                                                     String[] needles) { 
+                                                     String[] needles) {
         // TODO: Implement (Problem e)
-        return new HashMap<String, Integer>();
+        HashMap<String, Integer> hmap = new HashMap<>();
+
+        for (String x : needles) {
+            if (haystack.contains(x))
+                hmap.put(x, haystack.indexOf(x));
+        }
+
+        return hmap;
     }
 }

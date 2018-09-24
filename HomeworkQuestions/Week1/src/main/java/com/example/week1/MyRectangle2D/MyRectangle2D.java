@@ -2,7 +2,7 @@ package com.example.week1.MyRectangle2D;
 
 
 public class MyRectangle2D {
-    // getters return void
+    // getters return variables
     // setters return void, changes this.method
 
     // ++i , i will increase before executing stuff in the loop
@@ -13,20 +13,20 @@ public class MyRectangle2D {
 
     public MyRectangle2D() // constructor
     {
-      this.x = 0;
-      this.y = 0;
-      this.width = 1;
-      this.height = 1;
+        setX(0);
+        setY(0);
+        setWidth(1);
+        setHeight(1);
     }
 
     // specified x, y, height and width
 
     public MyRectangle2D(double inputx, double inputy, double inputWidth, double inputHeight) // constructor
     {
-        this.x = inputx;
-        this.y = inputy;
-        this.width = inputWidth;
-        this.height = inputHeight;
+        setX(inputx);
+        setY(inputy);
+        setWidth(inputWidth);
+        setHeight(inputHeight);
     }
 
     public double getX()
@@ -34,7 +34,7 @@ public class MyRectangle2D {
         return this.x;
     }
 
-    public double gety()
+    public double getY()
     {
         return this.y;
     }
@@ -57,6 +57,26 @@ public class MyRectangle2D {
     public double getPerimeter()
     {
         return 2*(this.width + this.height);
+    }
+
+    public double getWidth()
+    {
+        return this.width;
+    }
+
+    public double getHeight()
+    {
+        return this.height;
+    }
+
+    public void setWidth(double inputWidth)
+    {
+        this.width = inputWidth;
+    }
+
+    public void setHeight(double inputHeight)
+    {
+        this.height = inputHeight;
     }
 
     public boolean contains(double x, double y)

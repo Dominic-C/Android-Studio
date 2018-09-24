@@ -12,5 +12,9 @@ public class TestAccount {
         account.deposit(3000);
         System.out.println("Balance is " + account.getBalance());
         System.out.println("Monthly interest is " + account.getMonthlyInterest());
+
+        System.out.println("getMonthlyInterestRate: " + account.getMonthlyInterestRate());
+        Account.setAnnualInterestRate(6.5);
+        System.out.println("getMonthlyInterestRate: " + account.getMonthlyInterestRate());
     }
 }

@@ -7,6 +7,11 @@ public class Main {
         rect.setX(0);
         rect.setY(0);
 
+        MyRectangle2D newRect = new MyRectangle2D(0,0,3,2);
+
+        System.out.println("default area = " + rect.getArea());
+        System.out.println("default area = " + newRect.getArea());
+
         System.out.println("Does test rectangle contain the point (0.5, 0.5)?: " + rect.contains(0.5, 0.5));
 
         MyRectangle2D bigRect = new MyRectangle2D(-1, 2, 6, 4);
