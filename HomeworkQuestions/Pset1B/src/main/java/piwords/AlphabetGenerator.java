@@ -87,7 +87,6 @@ public class AlphabetGenerator {
         // arraylist of sorted alphabets
         Collections.sort(filteredCharArray);
 
-        System.out.println(filteredCharArray);
 
         // use hashmap to generate key value pairs
         Map<Character, Integer> UndividedCDF = new HashMap<>();
@@ -121,7 +120,6 @@ public class AlphabetGenerator {
             charOrder[j] = (char)characters[j];
         }
 
-
         // int CDFs
         int [] CDFint = new int[PDF.length];
         int countIndexCDF = 0;
@@ -132,7 +130,6 @@ public class AlphabetGenerator {
             CDFint[countIndexCDF] = sum;
             countIndexCDF++;
         }
-        System.out.println(Arrays.toString(CDFint));
 
         // double CDF * base/total
         int arrayLength = filteredCharArray.size();
@@ -141,22 +138,19 @@ public class AlphabetGenerator {
         {
             CDFdouble[i] = (double)CDFint[i] * (base)/arrayLength;
         }
-        System.out.println(Arrays.toString(CDFdouble));
 
 
+        // Output array
         int ansIndex = 0;
         char [] ans = new char[base];
         for(int i = 0; i < PDF.length; i++)
         {
-            System.out.println(charOrder[i]);
             for(int j = 0; ansIndex < CDFdouble[i]; j++)
             {
                 ans[ansIndex] = charOrder[i];
                 ansIndex++;
             }
         }
-
-        System.out.println(Arrays.toString(ans));
         return ans;
     }
 }
