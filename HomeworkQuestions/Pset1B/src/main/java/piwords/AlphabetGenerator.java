@@ -1,9 +1,14 @@
 package piwords;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.Character.isLetter;
+import static java.lang.Character.isLowerCase;
 
 public class AlphabetGenerator {
     /**
@@ -65,71 +70,93 @@ public class AlphabetGenerator {
         String combinedString = "";
         for(String x : trainingData)
         {
-            // might need to do a character check here.
-            x.toLowerCase();
             combinedString = combinedString + x;
         }
 
         // sorting the array
         char[] chararray = combinedString.toCharArray();
-        Arrays.sort(chararray);
-
-        // generate alphabets in a list
-        ArrayList<Character> checklist = new ArrayList<>();
-        for(int i = 97; i <= 122; i++)
+        ArrayList<Character> filteredCharArray = new ArrayList<>();
+        for(Character x : chararray)
         {
-            checklist.add((char)(i));
-        }
-
-        // create a hashmap and initialize to all 0;
-        Map<Character, Integer> hmap = new HashMap<>();
-        for(Character x: checklist)
-        {
-            hmap.put(x, 0);
-        }
-
-        // filling up hashmap with keys and values
-        for(Character y: chararray)
-        {
-            int value = hmap.get(y);
-            hmap.put(y,value+1);
-        }
-
-        // PDF
-        double arrayLength = chararray.length;
-        double [] PDFarray = new double[26];
-
-        Map<Character, Double> newHmap = new HashMap<>();
-        for(Character z: chararray)
-        {
-            newHmap.put(z, (double)(hmap.get(z))/arrayLength);
-        }
-
-        for(int k = 0; k < 26; k++)
-        {
-            PDFarray[k] = newHmap.get((char)(k + 97));
-        }
-
-        // CDF
-        int [] CDFarray = new int[26];
-        double sum = 0;
-
-        for(int i = 0; i < PDFarray.length; i++)
-        {
-            sum += PDFarray[i];
-            CDFarray[i] = (int)(sum * base); // CDF array is multiplied by base in the same step
-        }
-
-        char [] ans = new char[base];
-        int indexCount = 0; // keeping track of the index.
-        for(int i = 0; i < 26; i++)
-        {
-            for(int j = 0; indexCount < CDFarray[i]; j++)
+            if((int)x >= 97 && (int)x <= 122) // check if small character
             {
-                ans[indexCount] = (char)(i + 97);
-                indexCount++;
+                filteredCharArray.add(x);
             }
         }
+
+        // arraylist of sorted alphabets
+        Collections.sort(filteredCharArray);
+
+        System.out.println(filteredCharArray);
+
+        // use hashmap to generate key value pairs
+        Map<Character, Integer> UndividedCDF = new HashMap<>();
+        for(Character c : filteredCharArray)
+        {
+            if(UndividedCDF.get(c) == null) // if values of the key does not exist, set to 1
+            {
+                UndividedCDF.put(c, 1);
+            }
+            else // if value of key exists, add 1
+            {
+                int value = UndividedCDF.get(c);
+                UndividedCDF.put(c, value + 1);
+            }
+        }
+
+        // int PDFs
+        Object [] PDF = UndividedCDF.values().toArray();
+        Object [] characters = UndividedCDF.keySet().toArray();
+
+        // create integer PDF array
+        int [] PDFint = new int[PDF.length];
+        for(int i = 0; i < PDF.length; i++)
+        {
+            PDFint[i] = (Integer)PDF[i];
+        }
+        // create character array in the corresponding order
+        char [] charOrder = new char[PDF.length];
+        for(int j = 0; j < PDF.length; j++)
+        {
+            charOrder[j] = (char)characters[j];
+        }
+
+
+        // int CDFs
+        int [] CDFint = new int[PDF.length];
+        int countIndexCDF = 0;
+        int sum = 0;
+        for(int x: PDFint)
+        {
+            sum += x;
+            CDFint[countIndexCDF] = sum;
+            countIndexCDF++;
+        }
+        System.out.println(Arrays.toString(CDFint));
+
+        // double CDF * base/total
+        int arrayLength = filteredCharArray.size();
+        double [] CDFdouble = new double[PDF.length];
+        for(int i = 0; i < PDF.length; i++)
+        {
+            CDFdouble[i] = (double)CDFint[i] * (base)/arrayLength;
+        }
+        System.out.println(Arrays.toString(CDFdouble));
+
+
+        int ansIndex = 0;
+        char [] ans = new char[base];
+        for(int i = 0; i < PDF.length; i++)
+        {
+            System.out.println(charOrder[i]);
+            for(int j = 0; ansIndex < CDFdouble[i]; j++)
+            {
+                ans[ansIndex] = charOrder[i];
+                ansIndex++;
+            }
+        }
+
+        System.out.println(Arrays.toString(ans));
         return ans;
     }
 }

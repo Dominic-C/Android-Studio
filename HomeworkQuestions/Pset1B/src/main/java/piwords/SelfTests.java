@@ -1,5 +1,7 @@
 package piwords;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.util.Arrays;
 
 public class SelfTests {
@@ -58,6 +60,10 @@ public class SelfTests {
         char [] alphabets2 = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         String result9 = dc.convertDigitsToString(digits2, 26, alphabets2);
         System.out.println("convertDigitsToString test case 2: " + result9);
+
+        String[] testdata = {"aa", "bbc", "cccd", "eeff"};
+
+        System.out.println(Arrays.toString(AlphabetGenerator.generateFrequencyAlphabet(26, testdata)));
 
     }
 }
