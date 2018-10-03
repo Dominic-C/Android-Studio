@@ -63,6 +63,8 @@ public class AlphabetGenerator {
     public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
         // TODO: Implement (Problem f)
+       /*NOTE: the main idea to solve this problem is to use integers for as long as we can.
+       Only at the last step, we use doubles. This was done to reduce precision errors.*/
 
         if(base<0)
             return null;
@@ -83,8 +85,6 @@ public class AlphabetGenerator {
                 filteredCharArray.add(x);
             }
         }
-
-        // arraylist of sorted alphabets
         Collections.sort(filteredCharArray);
 
 
@@ -103,28 +103,34 @@ public class AlphabetGenerator {
             }
         }
 
-        // int PDFs
-        Object [] PDF = UndividedCDF.values().toArray();
+        // Using the hashmap, we extract the keys and sort them.
+        // Since hashmaps elements are not confirmed to be in any particular order, its best to deal with actual arrays
         Object [] characters = UndividedCDF.keySet().toArray();
-
-        // create integer PDF array
-        int [] PDFint = new int[PDF.length];
-        for(int i = 0; i < PDF.length; i++)
+        char [] charOrder = new char[characters.length];
+        int charOrderIndex = 0;
+        for(Object x: characters)
         {
-            PDFint[i] = (Integer)PDF[i];
+            charOrder[charOrderIndex] = (char)x;
+            charOrderIndex++;
         }
-        // create character array in the corresponding order
-        char [] charOrder = new char[PDF.length];
-        for(int j = 0; j < PDF.length; j++)
+        Arrays.sort(charOrder);
+
+
+        // Now that the characters are sorted, we can create a corresponding int array
+        // PDF array of integers
+        int [] PDF = new int[characters.length];
+        int PDFindex = 0;
+        for(Character x: charOrder)
         {
-            charOrder[j] = (char)characters[j];
+            PDF[PDFindex] = UndividedCDF.get(x); // get corresponding int value from a character.
+            PDFindex++;
         }
 
-        // int CDFs
+        // CDF array of integers
         int [] CDFint = new int[PDF.length];
         int countIndexCDF = 0;
         int sum = 0;
-        for(int x: PDFint)
+        for(int x: PDF)
         {
             sum += x;
             CDFint[countIndexCDF] = sum;
@@ -133,24 +139,26 @@ public class AlphabetGenerator {
 
         // double CDF * base/total
         int arrayLength = filteredCharArray.size();
-        double [] CDFdouble = new double[PDF.length];
+        double [] CDFdouble = new double[characters.length];
         for(int i = 0; i < PDF.length; i++)
         {
-            CDFdouble[i] = (double)CDFint[i] * (base)/arrayLength;
+            CDFdouble[i] = (double)CDFint[i] * (base)/arrayLength; // Do all the non-integer calculations in one step to reduce precision errors.
         }
 
-
-        // Output array
+        // ===============Output array===================
         int ansIndex = 0;
         char [] ans = new char[base];
+
+        // while loop implementation to fill up the output array
         for(int i = 0; i < PDF.length; i++)
         {
-            for(int j = 0; ansIndex < CDFdouble[i]; j++)
+            while(ansIndex < CDFdouble[i])
             {
                 ans[ansIndex] = charOrder[i];
                 ansIndex++;
             }
         }
+
         return ans;
     }
 }
