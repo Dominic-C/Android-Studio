@@ -34,27 +34,25 @@ public class BaseTranslator {
     public static int[] convertBase(int[] digits, int baseA,
                                     int baseB, int precisionB) {
         // TODO: Implement (Problem c)
-        // check for error
+        for(int i =0; i < digits.length; i++)
+        {
+            if(digits[i] < 0)
+                return null;
+            if (digits[i] < 0 || digits[i] >= baseA)
+                return null;
+        }
+
         if (baseA < 2 || baseB < 2 || precisionB < 1)
             return null;
 
-//         clone digits to aviod mutating digits array
         int[] clonedDigits = digits.clone();
 
-        // initialize output array
         int[] output = new int[precisionB];
 
         for (int i = 0; i < precisionB; i++)
         {
-//            1. Keep a carry, initialize to 0.
             int carry = 0;
-
-            /*2. From RIGHT to LEFT
-             *   	    a. x = multiply the jth digit by baseB and add the carry
-             *          b. the new jth digit is x % baseA
-             *          c. carry = x / baseA
-             *          */
-            for (int j = digits.length-1; j >= 0; j--) // previously did not put >= and got wrong result. This is because we must remember to iterate for the 0th element in the list44
+            for (int j = digits.length-1; j >= 0; j--)
             {
                 int x = clonedDigits[j] * baseB + carry;
                 clonedDigits[j] = x % baseA;
@@ -64,7 +62,6 @@ public class BaseTranslator {
                 if (clonedDigits[j] < 0 || clonedDigits[j] >= baseA)
                     return null;
             }
-//            3. output[i] = carry
             output[i] = carry;
         }
         return output;
