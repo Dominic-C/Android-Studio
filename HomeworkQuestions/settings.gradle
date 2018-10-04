@@ -1,1 +1,1 @@
-include ':app', ':Week1', ':Pset1B', ':Week2'
+include ':app', ':Week1', ':Pset1B', ':Week2', ':InClassActivities'
