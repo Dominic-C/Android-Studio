@@ -1,7 +1,5 @@
 package com.example.hackerrank;
 
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class MyClass {

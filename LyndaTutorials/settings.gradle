@@ -1,1 +1,1 @@
-include ':app', ':GettingStarted', ':Resources', ':Hackerrank'
+include ':app', ':GettingStarted', ':Resources', ':Hackerrank', ':TImusOnlineJudge'
