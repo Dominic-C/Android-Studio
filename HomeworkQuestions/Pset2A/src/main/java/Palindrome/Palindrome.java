@@ -4,34 +4,19 @@ public class Palindrome {
 
     public static String checkPalindrome(String s)
     {
-        int length = s.length();
-        int counter = 0;
-
-        boolean isPalindrome = false;
-        if(s.charAt(0) == s.charAt(length))
-
+        if(s.length() == 0 || s.length() == 1)
+            return "is a palindrome"; // base case
+        if(s.charAt(0) == s.charAt(s.length()-1))
         {
-            if(s.substring(++counter, length-counter).length() == 1)
-            {
-                isPalindrome = true;
-            }
-            else
-                checkPalindrome(s.substring(++counter, length-counter));
+            return checkPalindrome(s.substring(1, s.length()-1));
         }
-        else
-            isPalindrome = false;
 
-        if(isPalindrome == true)
-            return s + " is a palindrome";
-        else
-            return s + " is not a palindrome";
-
-
+        return "not true";
     }
 
     public static void main(String[] args) {
         Palindrome p = new Palindrome();
 
-        System.out.println(p.checkPalindrome("abba"));
+        System.out.println(p.checkPalindrome("124321"));
     }
 }
