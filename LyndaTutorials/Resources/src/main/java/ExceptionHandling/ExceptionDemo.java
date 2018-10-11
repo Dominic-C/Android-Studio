@@ -44,7 +44,7 @@ public class ExceptionDemo {
 
         }
 
-        catch (ArithmeticException e)
+        catch (ArithmeticException e) // Arithmetic Exception is a subclass of RuntimeError. We put subclass before super classes
         {
             System.out.println(e);
             System.out.println("Cannot divide by Zero");
@@ -55,7 +55,7 @@ public class ExceptionDemo {
             System.out.println("Maximum number of entries in Array Exceeded");
         }
 
-        catch (Exception e) // if we place this exception before the other exceptions, we will get an error. Due to redundancy
+        catch (Exception e) // if we place this exception before the other exceptions, we will get an error. because the subclasses of these will never get executed
         {
             System.out.println("Unknown exception");
         }
