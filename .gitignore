@@ -5,5 +5,3 @@
 *.properties
 *gradlew
 *.iml
-*.idea
-*/gradle
