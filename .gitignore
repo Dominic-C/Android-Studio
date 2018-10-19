@@ -1,0 +1,9 @@
+*/build
+*.ser
+*.gradle
+*.bat
+*.properties
+*gradlew
+*.iml
+*.idea
+*/gradle
