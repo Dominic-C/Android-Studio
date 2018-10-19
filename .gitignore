@@ -1,6 +1,2 @@
 */build
-*.ser
-*.bat
-*.properties
-*gradlew
 *.iml
