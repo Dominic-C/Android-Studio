@@ -1,8 +1,7 @@
 package Robot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class GetPath {
     static int robot_r = 0, robot_c = 0;
@@ -13,6 +12,14 @@ public class GetPath {
         int numberOfRows = grid.length -1;
         int numberOfCols = grid[0].length -1;
         tempPath = path;
+        if(robot_r == 0 && robot_c == 0 && visited.size() == 0)
+        {
+            tempPath.add(new Point(0,0));
+            ArrayList<Integer> startingPoint = new ArrayList<>();
+            startingPoint.add(0);
+            startingPoint.add(0);
+            visited.add(startingPoint);
+        }
 
         // if row or column not in the the grid, return false (cannot reach destination)
         if(r > numberOfRows|| c > numberOfCols)
@@ -31,51 +38,44 @@ public class GetPath {
         pointToVisitRight.add(robot_r);
 
 
-        // condition to move down
-////        System.out.printf("grid[robot_r+1][robot_c] = grid[%d][%d]\n", robot_r+1, robot_c);
-//        System.out.printf("\nrobot_r = %d, robot_c = %d\n", robot_r, robot_c);
-//        System.out.println("robot_c + 1 <= numberOfCols = " + (robot_c + 1 <= numberOfCols));
-//        System.out.println("pointToVisitRight.x <= numberOfCols = " + (pointToVisitRight.x <= numberOfCols));
-//        System.out.println("grid[robot_r][robot_c+1] != 1 = " + (grid[robot_r][robot_c+1] != 1));
-//        System.out.println("!visited.contains(pointToVisitRight) = "+ !visited.contains(pointToVisitRight) + "\n");
-
-        if(robot_r + 1 <= numberOfRows && grid[robot_r+1][robot_c] != 1 && !visited.contains(pointToVisitDown) && pointToVisitDown.get(1) <= numberOfRows) // if block below is not a 1 and is inside the grid
+        if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1] != 1 && !visited.contains(pointToVisitRight) && pointToVisitRight.get(0) <= numberOfCols) // if block to the right is not a 1 and is inside the grid
         {
-                // move robot down by one block
-                moveDown();
+            moveRight();
         }
 
-        else if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1] != 1 && !visited.contains(pointToVisitRight) && pointToVisitRight.get(0) <= numberOfCols) // if block to the right is not a 1 and is inside the grid
-        {
 
-                // move robot right by one block
-                moveRight();
+        else if(robot_r + 1 <= numberOfRows && grid[robot_r+1][robot_c] != 1 && !visited.contains(pointToVisitDown) && pointToVisitDown.get(1) <= numberOfRows) // if block below is not a 1 and is inside the grid
+        {
+            moveDown();
         }
+
+
 
         else // otherwise, backtrack by one, remove point from path
         {
             // remove current point from path
             tempPath.remove(tempPath.size() - 1);
-//            System.out.println(tempPath);
-//
-//            System.out.println(visited);
-            // get last point
             Point lastPoint = tempPath.get(tempPath.size() - 1);
+
             robot_c = lastPoint.x;
             robot_r = lastPoint.y;
-//            System.out.println("lastPoint.x = " + lastPoint.x);
-//            System.out.println("lastPoint.y = " + lastPoint.y);
-            System.out.printf("Dead end, back tracking to (%d,%d)", robot_c, robot_r);
+//            System.out.printf("Dead end, back tracking to (%d,%d)\n", robot_r, robot_c);
 
             // if last point was the starting point, it means that it failed to find a solution
             if(lastPoint.x == 0 && lastPoint.y == 0)
                 return false;
         }
 
-        // if robot_c and robot_r not at destination, call getPath(r,c,path,grid)
+        // if robot_c and robot_r not at destination
         if(robot_c == c && robot_r == r)
         {
             return true;
+        }
+
+        // if robot reaches back to start position, it gave up
+        if(robot_c == 0 && robot_r == 0)
+        {
+            return false;
         }
 
 
@@ -90,7 +90,7 @@ public class GetPath {
         visitedPosition.add(robot_r);
         visited.add(visitedPosition);
         tempPath.add(new Point(robot_c, robot_r));
-        System.out.printf("moved right to: (%d,%d)\n",robot_r, robot_c);
+//        System.out.printf("moved right to: (%d,%d)\n",robot_r, robot_c);
     }
 
     public static void moveDown()
@@ -101,13 +101,9 @@ public class GetPath {
         visitedPosition.add(robot_r);
         visited.add(visitedPosition);
         tempPath.add(new Point(robot_c, robot_r));
-        System.out.printf("moved down to: (%d,%d)\n",robot_r, robot_c);
+//        System.out.printf("moved down to: (%d,%d)\n",robot_r, robot_c);
     }
 
-//    public boolean isOccupiedRight()
-//    {
-//        if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1])
-//    }
 }
 
 class Point {
