@@ -29,9 +29,9 @@ public class GetPath {
         {
             robot_r = 0;
             robot_c = 0;
+            visited.clear();
             return true;
         }
-
 
         // points to visit
         ArrayList<Integer> pointToVisitDown = new ArrayList<>();
@@ -42,19 +42,15 @@ public class GetPath {
         pointToVisitRight.add(robot_c+1);
         pointToVisitRight.add(robot_r);
 
-
-        if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1] != 1 && !visited.contains(pointToVisitRight) && pointToVisitRight.get(0) <= numberOfCols) // if block to the right is not a 1 and is inside the grid
+        if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1] == 0 && !visited.contains(pointToVisitRight) && pointToVisitRight.get(0) <= numberOfCols) // if block to the right is not a 1 and is inside the grid
         {
             moveRight();
         }
 
-
-        else if(robot_r + 1 <= numberOfRows && grid[robot_r+1][robot_c] != 1 && !visited.contains(pointToVisitDown) && pointToVisitDown.get(1) <= numberOfRows) // if block below is not a 1 and is inside the grid
+        else if(robot_r + 1 <= numberOfRows && grid[robot_r+1][robot_c] == 0 && !visited.contains(pointToVisitDown) && pointToVisitDown.get(1) <= numberOfRows) // if block below is not a 1 and is inside the grid
         {
             moveDown();
         }
-
-
 
         else // otherwise, backtrack by one, remove point from path
         {
@@ -62,18 +58,9 @@ public class GetPath {
             tempPath.remove(tempPath.size() - 1);
             Point lastPoint = tempPath.get(tempPath.size() - 1);
 
-            robot_c = lastPoint.x;
-            robot_r = lastPoint.y;
-//            System.out.printf("Dead end, back tracking to (%d,%d)\n", robot_r, robot_c);
-
-            // if last point was the starting point, it means that it failed to find a solution
-            if(lastPoint.x == 0 && lastPoint.y == 0)
-            {
-                robot_r = 0;
-                robot_c = 0;
-                return false;
-            }
-
+            robot_c = lastPoint.y;
+            robot_r = lastPoint.x;
+//            System.out.printf("Dead end, back tracking to (%d,%d)\n", robot_r, robot_c)
         }
 
         // if robot_c and robot_r not at destination
@@ -81,6 +68,7 @@ public class GetPath {
         {
             robot_r = 0;
             robot_c = 0;
+            visited.clear();
             return true;
         }
 
@@ -89,9 +77,9 @@ public class GetPath {
         {
             robot_r = 0;
             robot_c = 0;
+            visited.clear();
             return false;
         }
-
 
         return getPath(r,c,tempPath,grid);
     }
@@ -103,7 +91,7 @@ public class GetPath {
         visitedPosition.add(robot_c);
         visitedPosition.add(robot_r);
         visited.add(visitedPosition);
-        tempPath.add(new Point(robot_c, robot_r));
+        tempPath.add(new Point(robot_r, robot_c));
 //        System.out.printf("moved right to: (%d,%d)\n",robot_r, robot_c);
     }
 
@@ -114,7 +102,7 @@ public class GetPath {
         visitedPosition.add(robot_c);
         visitedPosition.add(robot_r);
         visited.add(visitedPosition);
-        tempPath.add(new Point(robot_c, robot_r));
+        tempPath.add(new Point(robot_r, robot_c));
 //        System.out.printf("moved down to: (%d,%d)\n",robot_r, robot_c);
     }
 
