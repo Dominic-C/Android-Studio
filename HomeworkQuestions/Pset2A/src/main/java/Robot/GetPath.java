@@ -26,7 +26,12 @@ public class GetPath {
             return false;
 
         if(robot_c == c && robot_r == r) // if robot is at destination, return false
+        {
+            robot_r = 0;
+            robot_c = 0;
             return true;
+        }
+
 
         // points to visit
         ArrayList<Integer> pointToVisitDown = new ArrayList<>();
@@ -63,18 +68,27 @@ public class GetPath {
 
             // if last point was the starting point, it means that it failed to find a solution
             if(lastPoint.x == 0 && lastPoint.y == 0)
+            {
+                robot_r = 0;
+                robot_c = 0;
                 return false;
+            }
+
         }
 
         // if robot_c and robot_r not at destination
         if(robot_c == c && robot_r == r)
         {
+            robot_r = 0;
+            robot_c = 0;
             return true;
         }
 
         // if robot reaches back to start position, it gave up
         if(robot_c == 0 && robot_r == 0)
         {
+            robot_r = 0;
+            robot_c = 0;
             return false;
         }
 
