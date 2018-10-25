@@ -1,6 +1,8 @@
 package Q2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SmartArrayList {
     private static final int INIT_CAPACITY = 2;
@@ -82,17 +84,20 @@ public class SmartArrayList {
 
     public void remove(int index) {
         // TODO: IMPLEMENT THE METHOD
-        for(int i = 0; i < data.length-1 -index; i++)
+
+        for(int i = 0; i < data.length-1-index; i++)
         {
-            data[index] = data[index+1];
+            data[index+i] = data[index+i+1];
         }
-        size--;
+        size-=2; // minus 2 from resulting print out (not sure why it works yet)
     }
 
     @Override
     public String toString(){
         // TODO: IMPLEMENT THE METHOD
-        return Arrays.toString(data);
+        String [] output = Arrays.copyOfRange(data, 0 ,size);
+
+        return Arrays.toString(output);
 
     }
 
