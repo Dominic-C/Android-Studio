@@ -1,3 +1,6 @@
 <resources>
+    <!--keys are housed inside colons, messages in blue-->
     <string name="app_name">HellWorldApp</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
 </resources>
