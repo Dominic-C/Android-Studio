@@ -117,12 +117,13 @@ public class PianoMachine {
             if(note.getKind() == NoteEvent.Kind.start)
             {
 //                midi.beginNote(note.getPitch().toMidiFrequency(),instrument);
-                beginNote(note.getPitch());
+                beginNote(note.getPitch()); // cant use this, but why?
             }
-            if(note.getKind() == NoteEvent.Kind.stop)
+//            if(note.getKind() == NoteEvent.Kind.stop) cant use this. need to figure out why
+            else
             {
-//                midi.endNote(note.getPitch().toMidiFrequency(),instrument);
-                endNote(note.getPitch());
+                midi.endNote(note.getPitch().toMidiFrequency(),instrument);
+//                endNote(note.getPitch()); // cant use this, but why?
             }
         }
         // System.out.println(midi.history());
