@@ -9,23 +9,32 @@
 
     <TextView
         android:id="@+id/textViewRandomImages"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_gravity="center"
+        android:text="Random Image Generator"
         />
 
     <ImageView
         android:id="@+id/charaImages"
         android:layout_width="match_parent"
         android:layout_height="390dp"
-        android:src="@drawable/bartsimpson"
-        />
+        android:src="@drawable/pikachu" />
 
     <Button
         android:id="@+id/charaButton"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Show Next Image"
+        android:gravity="center"
+        />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="reset image"
+        android:gravity="center"
         />
 
 </LinearLayout>
