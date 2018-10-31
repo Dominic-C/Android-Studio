@@ -39,7 +39,13 @@ public class StringOperations {
     }
 
     public static void main(String[] args) {
-        System.out.println(isUnique("aee"));
-        System.out.println(isPermutation("apple", "ppale"));
+
+                System.out.println(isUnique("abcdefghijklmnopqrstuvABC"));
+
+                System.out.println(isUnique("abcdefgghijklmnopqrstuvABC"));
+
+                System.out.println(isPermutation("@ab", "a@b"));
+
+                System.out.println(isPermutation("abcd", "bcdA"));
     }
 }
