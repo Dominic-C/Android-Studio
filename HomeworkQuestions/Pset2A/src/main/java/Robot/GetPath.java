@@ -5,17 +5,25 @@ import java.util.ArrayList;
 public class GetPath {
 
     /**
-     * Implemented a Depth First Search algorithm to make the robot traverse down to a specified point
+     * Implemented a Depth First Search (DFS) algorithm to make the robot traverse down to a specified point
+     * recursive call once whenever i reach a new node.
      *
+     * Code below consists of if else statements that tells the robot what to do to get to a new node
+     * If it cant go to a new node, it recursively goes back to the previous node to find for alternative paths
     * */
     static int robot_r = 0, robot_c = 0;
+    // Nested array list to store points.
     static final ArrayList<ArrayList> visited = new ArrayList<>();
     static ArrayList<Point> tempPath = new ArrayList<>();
 
     public static boolean getPath (int r, int c, ArrayList<Point> path, final int [][] grid) {
         int numberOfRows = grid.length -1;
         int numberOfCols = grid[0].length -1;
+
+        // want a static array because i want to use it in a method
         tempPath = path;
+
+        // adding initial start point (0,0)
         if(robot_r == 0 && robot_c == 0 && visited.size() == 0)
         {
             tempPath.add(new Point(0,0));
@@ -30,7 +38,8 @@ public class GetPath {
         if(r > numberOfRows|| c > numberOfCols)
             return false;
 
-        if(robot_c == c && robot_r == r) // if robot is at destination, return true
+        // if robot is at destination, return true
+        if(robot_c == c && robot_r == r)
         {
             cleanup();
             return true;
@@ -49,6 +58,7 @@ public class GetPath {
         if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1] == 0 && !visited.contains(pointToVisitRight) && pointToVisitRight.get(0) <= numberOfCols) // if block to the right is not a 1 and is inside the grid
         {
             moveRight();
+            // could have added path.add(new Point) here, but put into method to make things neater
         }
 
         // checking if left node is available for visiting
@@ -57,7 +67,8 @@ public class GetPath {
             moveDown();
         }
 
-        else // otherwise, backtrack by one, remove point from path
+        // otherwise, backtrack by one, remove point from path
+        else
         {
             // remove current point from path
             tempPath.remove(tempPath.size() - 1);
@@ -82,6 +93,7 @@ public class GetPath {
         bottomPoint.add(robot_r+1);
 
         // if robot reaches back to start position, it gave up
+        // IMPORTANT: without the last check in this statement, if robot goes back to 0,0 but has not explored the node below 0,0, it returns a false negative result.
         if(robot_c == 0 && robot_r == 0 && (visited.contains(bottomPoint) || grid[1][0] == 1))
         {
             cleanup();
@@ -91,6 +103,7 @@ public class GetPath {
         return getPath(r,c,tempPath,grid);
     }
 
+    // Move methods set robot_c and robot_r to current c and r, then adds location to visited and path arrays
     public static void moveRight()
     {
         robot_c++;
