@@ -3,6 +3,11 @@ package Robot;
 import java.util.ArrayList;
 
 public class GetPath {
+
+    /**
+     * Implemented a Depth First Search algorithm to make the robot traverse down to a specified point
+     *
+    * */
     static int robot_r = 0, robot_c = 0;
     static final ArrayList<ArrayList> visited = new ArrayList<>();
     static ArrayList<Point> tempPath = new ArrayList<>();
@@ -14,6 +19,7 @@ public class GetPath {
         if(robot_r == 0 && robot_c == 0 && visited.size() == 0)
         {
             tempPath.add(new Point(0,0));
+            // add starting point
             ArrayList<Integer> startingPoint = new ArrayList<>();
             startingPoint.add(0);
             startingPoint.add(0);
@@ -24,11 +30,9 @@ public class GetPath {
         if(r > numberOfRows|| c > numberOfCols)
             return false;
 
-        if(robot_c == c && robot_r == r) // if robot is at destination, return false
+        if(robot_c == c && robot_r == r) // if robot is at destination, return true
         {
-            robot_r = 0;
-            robot_c = 0;
-            visited.clear();
+            cleanup();
             return true;
         }
 
@@ -41,11 +45,13 @@ public class GetPath {
         pointToVisitRight.add(robot_c+1);
         pointToVisitRight.add(robot_r);
 
+        // checking if right node is available for visiting
         if(robot_c + 1 <= numberOfCols && grid[robot_r][robot_c+1] == 0 && !visited.contains(pointToVisitRight) && pointToVisitRight.get(0) <= numberOfCols) // if block to the right is not a 1 and is inside the grid
         {
             moveRight();
         }
 
+        // checking if left node is available for visiting
         else if(robot_r + 1 <= numberOfRows && grid[robot_r+1][robot_c] == 0 && !visited.contains(pointToVisitDown) && pointToVisitDown.get(1) <= numberOfRows) // if block below is not a 1 and is inside the grid
         {
             moveDown();
@@ -55,8 +61,9 @@ public class GetPath {
         {
             // remove current point from path
             tempPath.remove(tempPath.size() - 1);
-            Point lastPoint = tempPath.get(tempPath.size() - 1);
 
+            // set robots location back to last point before failing
+            Point lastPoint = tempPath.get(tempPath.size() - 1);
             robot_c = lastPoint.y;
             robot_r = lastPoint.x;
 //            System.out.printf("Dead end, back tracking to (%d,%d)\n", robot_r, robot_c);
@@ -65,9 +72,7 @@ public class GetPath {
         // if robot_c and robot_r not at destination
         if(robot_c == c && robot_r == r)
         {
-            robot_r = 0;
-            robot_c = 0;
-            visited.clear();
+            cleanup();
             return true;
         }
         // need to check if it has visited bottom bottom nodes, previously terminated at 0,0
@@ -79,9 +84,7 @@ public class GetPath {
         // if robot reaches back to start position, it gave up
         if(robot_c == 0 && robot_r == 0 && (visited.contains(bottomPoint) || grid[1][0] == 1))
         {
-            robot_r = 0;
-            robot_c = 0;
-            visited.clear();
+            cleanup();
             return false;
         }
 
@@ -108,6 +111,13 @@ public class GetPath {
         visited.add(visitedPosition);
         tempPath.add(new Point(robot_r, robot_c));
 //        System.out.printf("moved down to: (%d,%d)\n",robot_r, robot_c);
+    }
+
+    public static void cleanup()
+    {
+        robot_r = 0;
+        robot_c = 0;
+        visited.clear();
     }
 
 }
