@@ -48,14 +48,14 @@ class AirPollutionAlert implements Subject{
 	}
 
 	@Override
-	public void notifyObservers() {
+	public void notifyObservers() { // this method is called when any notable change occurs
 		for(Observer o : l)
 		{
 			o.update(airPollutionIndex);
 		}
 	}
 
-	public void setAirPollutionIndex(double airPollutionIndex) {
+	public void setAirPollutionIndex(double airPollutionIndex) { // when any change occurs, notify my observers
 		this.airPollutionIndex = airPollutionIndex;
 		if(airPollutionIndex > 100)
 		{
