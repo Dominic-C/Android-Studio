@@ -36,7 +36,10 @@ public class ExceptionDemo {
 
         try{
             k = i/j; // critical statement, not sure if this will throw error
-
+            if(k < 10)
+            {
+                throw new ArithmeticException(); // forcefully throw this error because we dont want k to be less than 10
+            }
             for(int c = 0; c <=4; c++) {
                 a[c] = c + 1;
                 System.out.println(a[c]);
@@ -63,6 +66,9 @@ public class ExceptionDemo {
         finally
         {
             // this block should ALWAYS be executed irregardless of an exception
+            // normally used for code cleanup
+            // you can do a return in try, but finally will still run.
+            // Bottom line, even if you put a return, or break or continue in any try or catch block, the statements inside the finally block will still be executed!
             System.out.println("In the finally block");
         }
 
