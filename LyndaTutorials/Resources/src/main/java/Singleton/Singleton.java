@@ -11,6 +11,7 @@ public class Singleton {
     }
     public static Singleton getInstance()
     {
+        // if statement is an added on feature that checks if there is already an instance
         if(instance == null)
         {
             instance = new Singleton();
