@@ -9,7 +9,7 @@ public class SmartArrayList {
     private int size=0;  // no of element stored
     private String[] data = new String[INIT_CAPACITY]; // where the element stored
 
-
+    // recommended answers mostly use size instead of data.length
     public SmartArrayList() {
 
     }
@@ -55,8 +55,9 @@ public class SmartArrayList {
         // TODO: IMPLEMENT THE METHOD
         if(data[data.length-1] == null)
         {
-            data[size] = s;
-            size++;
+//            data[size] = s;
+//            size++;
+            add(size, s);
         }
 
     }
@@ -75,9 +76,8 @@ public class SmartArrayList {
 
     public void set(int index, String s){
         // TODO: IMPLEMENT THE METHOD
-        if(index <= data.length-1 && index >= 0)
+        if(index <= size-1 && index >= 0)
         {
-            size++;
             data[index] = s;
         }
     }
@@ -85,11 +85,11 @@ public class SmartArrayList {
     public void remove(int index) {
         // TODO: IMPLEMENT THE METHOD
 
-        for(int i = 0; i < data.length-1-index; i++)
+        for(int i = 0; i < size-1; i++)
         {
             data[index+i] = data[index+i+1];
         }
-        size-=2; // minus 2 from resulting print out (not sure why it works yet)
+        size-=1; // minus 2 from resulting print out (not sure why it works yet)
     }
 
     @Override
