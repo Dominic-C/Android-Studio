@@ -22,10 +22,9 @@ public class MainActivity extends AppCompatActivity {
     {
         // building intent
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
+        EditText editText = (EditText) findViewById(R.id.editText); // just used to get text from edit text view so we can pass it later
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message); // key, value
         startActivity(intent);
     }
 }
-;
